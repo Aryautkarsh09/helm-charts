@@ -1,0 +1,37 @@
+{{- if .Values.serverDeployment.enabled }}
+{{- if .Values.initializeDeployment }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.application.name}}
+  annotations:
+    helm.sh/resource-policy: keep
+spec:
+  ports:
+  - port: {{.Values.service.port}}
+    protocol: TCP
+    targetPort: {{.Values.service.targetPort}}
+  selector:
+    app: {{.Values.application.name}}-primary
+  sessionAffinity: None
+  type: {{.Values.service.type}}
+{{- end }}
+{{ else }}
+{{- if .Values.initializeDeployment }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.application.name}}
+  annotations:
+    helm.sh/resource-policy: keep
+spec:
+  ports:
+  - port: {{.Values.service.port}}
+    protocol: TCP
+    targetPort: {{.Values.service.targetPort}}
+  selector:
+    app: {{.Values.application.name}}
+  sessionAffinity: None
+  type: {{.Values.service.type}}
+{{- end }}
+{{- end }} 
