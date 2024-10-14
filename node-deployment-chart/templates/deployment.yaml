@@ -38,14 +38,7 @@ spec:
       labels:
         app: {{.Values.application.name }}
         mode: backend
-    spec:   
-      topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: topology.kubernetes.io/zone
-        whenUnsatisfiable: ScheduleAnyway
-        labelSelector:
-          matchLabels:
-            app: {{.Values.application.name }}
+    spec:
       dnsConfig:
           options:
           - name: ndots
@@ -123,15 +116,4 @@ spec:
           capabilities:
             drop: [ 'NET_RAW', 'ALL' ] 
       dnsPolicy: ClusterFirst
-      tolerations: 
-      {{- if .Values.serverDeployment.nodeaffinity.enabled  }}
-      - key: {{ .Values.serverDeployment.nodeaffinity.nodeTaintKey }}
-        operator: "Equal" 
-        value: {{ .Values.serverDeployment.nodeaffinity.nodeTaintValue }} 
-        effect: "NoSchedule" 
-      {{- end  }}
-      - key: "spotInstance" 
-        operator: "Equal" 
-        value: "true" 
-        effect: "PreferNoSchedule" 
 {{- end }}
