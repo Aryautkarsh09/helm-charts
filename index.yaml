@@ -3,7 +3,7 @@ entries:
   node-deployment-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-10-14T01:49:00.703062+05:30"
+    created: "2024-10-14T09:40:19.551419+05:30"
     description: A Helm chart for Kubernetes
     digest: efb4b975ddffabef5eeb02b95422ad500eec46dc6598cd75655b058a1904449b
     name: node-deployment-chart
@@ -11,4 +11,4 @@ entries:
     urls:
     - node-deployment-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-14T01:49:00.701352+05:30"
+generated: "2024-10-14T09:40:19.550972+05:30"
