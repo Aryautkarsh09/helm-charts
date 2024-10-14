@@ -134,36 +134,4 @@ spec:
         operator: "Equal" 
         value: "true" 
         effect: "PreferNoSchedule" 
-      affinity: 
-        nodeAffinity: 
-          preferredDuringSchedulingIgnoredDuringExecution: 
-          - weight: 1 
-            preference: 
-              matchExpressions: 
-              - key: eks.amazonaws.com/capacityType 
-                operator: In 
-                values: 
-                - spot
-              {{- if .Values.serverDeployment.nodeaffinity.enabled  }}
-              - key: {{ .Values.serverDeployment.nodeaffinity.nodeTaintKey }}
-                operator: In
-                values:
-                -  {{ .Values.serverDeployment.nodeaffinity.nodeTaintValue }}
-              {{- end}}  
-          requiredDuringSchedulingIgnoredDuringExecution: 
-              {{- if .Values.serverDeployment.nodeaffinity.enabled }}
-                    nodeSelectorTerms: 
-                      - matchExpressions: 
-                        - key: {{ .Values.serverDeployment.nodeaffinity.nodeTaintKey }}
-                          operator: In
-                          values:
-                          - {{ .Values.serverDeployment.nodeaffinity.nodeTaintValue }}
-              {{- else }}
-                    nodeSelectorTerms: 
-                      - matchExpressions: 
-                        - key: intent 
-                          operator: In 
-                          values: 
-                          - apps 
-              {{- end }}
 {{- end }}
