@@ -34,7 +34,7 @@ spec:
         env:
           - name: NODE_ENV
             value: "development"
-          {{- with $index }}
+          {{- range .env }}  # Assuming $worker has an env section
           - name: {{.name}}
             value: {{.value}}
           {{- end }}
